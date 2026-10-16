@@ -22,12 +22,16 @@ export function ExtensibilitySection() {
     <section id="extensibility" className="border-t border-line bg-canvas">
       <div className="mx-auto grid max-w-7xl gap-16 px-5 py-28 sm:px-8 sm:py-36 lg:grid-cols-2 lg:gap-24">
         <div>
-          <SectionHeading eyebrow="Extensibility" title="Open where it makes sense.">
-            Puros is closed source, but its integration layer is not. New sources plug in as providers: separate
-            packages built against a public, MIT-licensed SDK and installed from Settings.
+          <SectionHeading eyebrow="Open source" title="Open all the way down.">
+            Puros is free and open source under the GPL-3.0, and so is everything around it. New sources plug in as
+            providers: separate packages built against a public, MIT-licensed SDK and installed from Settings.
           </SectionHeading>
 
           <div className="reveal mt-10 flex flex-col gap-3 text-sm sm:flex-row sm:gap-6">
+            <a href={LINKS.source} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-1.5 text-text">
+              Puros source code
+              <ArrowRightIcon className="size-3.5 text-accent transition group-hover:translate-x-0.5" />
+            </a>
             <a href={LINKS.sdk} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-1.5 text-text">
               Provider SDK
               <ArrowRightIcon className="size-3.5 text-accent transition group-hover:translate-x-0.5" />

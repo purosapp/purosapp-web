@@ -1,5 +1,5 @@
 import home from "@/assets/screenshots/home.png";
-import { MINIMUM_MACOS } from "@/lib/links";
+import { LINKS, MINIMUM_MACOS } from "@/lib/links";
 import { RELEASES_URL, type Release } from "@/lib/release";
 import { DownloadButton, SecondaryLink } from "./buttons";
 import { ArrowRightIcon, GitHubIcon } from "./icons";
@@ -34,14 +34,15 @@ export function Hero({ release }: { release: Release | null }) {
           </h1>
           <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-pretty text-muted sm:text-xl">
             Puros is a macOS music player with a serious audio engine. It takes exclusive control of your DAC,
-            follows every track&rsquo;s sample rate, and shows you the whole signal path from file to output.
+            follows every track&rsquo;s sample rate, and shows you the whole signal path from file to output. Free and
+            open source.
           </p>
 
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <DownloadButton release={release} className="w-full sm:w-auto" />
-            <SecondaryLink href={release?.notesUrl ?? RELEASES_URL} className="w-full sm:w-auto">
+            <SecondaryLink href={LINKS.source} className="w-full sm:w-auto">
               <GitHubIcon className="size-4" />
-              Release notes
+              View source on GitHub
             </SecondaryLink>
           </div>
           <p className="mt-5 font-mono text-xs tracking-wide text-faint">{requirements.join("  ·  ")}</p>

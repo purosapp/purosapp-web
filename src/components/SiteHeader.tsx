@@ -7,7 +7,7 @@ const NAV = [
   { href: "#signal-path", label: "Signal Path" },
   { href: "#dsp", label: "DSP" },
   { href: "#library", label: "Library" },
-  { href: "#extensibility", label: "Extensibility" },
+  { href: "#extensibility", label: "Open Source" },
 ];
 
 export function SiteHeader({ release }: { release: Release | null }) {

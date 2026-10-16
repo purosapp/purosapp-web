@@ -18,8 +18,11 @@ export function FinalCta({ release }: { release: Release | null }) {
           {release ? `Puros ${release.label} is out now.` : "Puros Alpha is out now."}
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-pretty text-muted">
-          This is an alpha: expect rough edges and missing pieces, and tell us what breaks. Every build is signed with a
-          Developer ID and notarized by Apple.
+          This is an alpha: expect rough edges and missing pieces, and tell us what breaks, or send a fix: the{" "}
+          <a href={LINKS.source} target="_blank" rel="noopener noreferrer" className="text-text underline decoration-line-strong underline-offset-4 transition hover:decoration-text">
+            source is on GitHub
+          </a>
+          . Every build is signed with a Developer ID and notarized by Apple.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <DownloadButton release={release} className="w-full sm:w-auto" />
@@ -33,7 +36,7 @@ export function FinalCta({ release }: { release: Release | null }) {
           </SecondaryLink>
         </div>
         <p className="mt-6 font-mono text-xs tracking-wide text-faint">
-          {[release?.architecture ?? "Apple Silicon", MINIMUM_MACOS].join("  ·  ")}
+          {[release?.architecture ?? "Apple Silicon", MINIMUM_MACOS, "GPL-3.0"].join("  ·  ")}
         </p>
       </div>
     </section>
