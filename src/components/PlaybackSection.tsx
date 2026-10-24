@@ -1,3 +1,4 @@
+import { AmbientLight } from "./AmbientLight";
 import { SectionHeading } from "./SectionHeading";
 
 const CAPABILITIES = [
@@ -14,7 +15,7 @@ const CAPABILITIES = [
   {
     title: "DSD over DoP",
     spec: "DSF · DFF · up to DSD256",
-    body: "DSD files reach DoP-capable DACs natively. Outputs without DoP get a configurable DSD-to-PCM conversion instead.",
+    body: "DSD reaches DoP-capable DACs untouched. For outputs without DoP, Puros decimates the 1-bit stream to 64-bit PCM as it plays, with linear-phase filters that keep DSD noise out of the audio band.",
   },
   {
     title: "Volume that keeps it bit-perfect",
@@ -30,26 +31,29 @@ const CAPABILITIES = [
 
 export function PlaybackSection() {
   return (
-    <section id="playback" className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
-      <div className="grid gap-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-24">
-        <div className="lg:sticky lg:top-32 lg:self-start">
-          <SectionHeading eyebrow="Audio engine" title="Built on CoreAudio, not around it.">
-            A native engine talks to your output device directly. When nothing needs to change, nothing does: the file
-            plays at its own rate and depth, bit for bit.
-          </SectionHeading>
-        </div>
+    <section id="playback" className="relative isolate">
+      <AmbientLight primary="navy" className="top-[15%] left-[30%]" />
+      <div className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
+        <div className="grid gap-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <SectionHeading eyebrow="Audio engine" title="Built on CoreAudio, not around it.">
+              A native engine talks to your output device directly. When nothing needs to change, nothing does: the file
+              plays at its own rate and depth, bit for bit.
+            </SectionHeading>
+          </div>
 
-        <dl className="reveal border-t border-line">
-          {CAPABILITIES.map((capability) => (
-            <div key={capability.title} className="grid gap-x-8 gap-y-2 border-b border-line py-8 sm:grid-cols-[1fr_auto]">
-              <dt className="text-xl font-medium tracking-tight text-text">{capability.title}</dt>
-              <dd className="font-mono text-xs tracking-wider text-accent uppercase sm:row-span-2 sm:pt-1.5 sm:text-right">
-                {capability.spec}
-              </dd>
-              <dd className="max-w-xl leading-relaxed text-muted">{capability.body}</dd>
-            </div>
-          ))}
-        </dl>
+          <dl className="glass reveal divide-y divide-line rounded-3xl px-6 sm:px-9">
+            {CAPABILITIES.map((capability) => (
+              <div key={capability.title} className="grid gap-x-8 gap-y-2 py-8 sm:grid-cols-[1fr_auto]">
+                <dt className="text-xl font-medium tracking-tight text-text">{capability.title}</dt>
+                <dd className="font-mono text-xs tracking-wider text-accent uppercase sm:row-span-2 sm:pt-1.5 sm:text-right">
+                  {capability.spec}
+                </dd>
+                <dd className="max-w-xl leading-relaxed text-muted">{capability.body}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import { LINKS } from "@/lib/links";
+import { AmbientLight } from "./AmbientLight";
 import { ArrowRightIcon } from "./icons";
 import { SectionHeading } from "./SectionHeading";
 
@@ -19,9 +20,10 @@ const POINTS = [
 
 export function ExtensibilitySection() {
   return (
-    <section id="extensibility" className="border-t border-line bg-canvas">
+    <section id="extensibility" className="relative isolate overflow-hidden">
+      <AmbientLight primary="teal" secondary="navy" className="top-[10%]" />
       <div className="mx-auto grid max-w-7xl gap-16 px-5 py-28 sm:px-8 sm:py-36 lg:grid-cols-2 lg:gap-24">
-        <div>
+        <div className="min-w-0">
           <SectionHeading eyebrow="Open source" title="Open all the way down.">
             Puros is free and open source under the GPL-3.0, and so is everything around it. New sources plug in as
             providers: separate packages built against a public, MIT-licensed SDK and installed from Settings.
@@ -46,8 +48,8 @@ export function ExtensibilitySection() {
           </p>
         </div>
 
-        <div className="reveal space-y-10">
-          <pre className="glass overflow-x-auto rounded-2xl p-6 font-mono text-[0.8rem] leading-7 text-muted">
+        <div className="reveal min-w-0 space-y-10">
+          <pre className="glass overflow-x-auto rounded-3xl p-6 sm:p-8 font-mono text-[0.8rem] leading-7 text-muted">
             <code>
               <span className="text-faint"># build a provider</span>
               {"\n"}npm install --save-dev <span className="text-text">puros-provider-sdk</span>

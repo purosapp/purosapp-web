@@ -1,5 +1,6 @@
 import albums from "@/assets/screenshots/albums.png";
-import liveRadio from "@/assets/screenshots/liveradio.png";
+import radio from "@/assets/screenshots/radio.png";
+import { AmbientLight } from "./AmbientLight";
 import { Screenshot } from "./Screenshot";
 import { SectionHeading } from "./SectionHeading";
 
@@ -9,11 +10,15 @@ const FORMATS = ["FLAC", "ALAC", "AIFF", "WAV", "MP3", "AAC", "DSF", "DFF"];
 const DETAILS = [
   {
     title: "Know what is playing",
-    body: "Format badges in the player show the codec, bit depth and sample rate, and flag DSD and MQA.",
+    body: "Format badges show the codec, bit depth and sample rate, flag DSD and MQA, and a quality mark sits in the player.",
   },
   {
     title: "Browse it your way",
-    body: "Artists, albums, tracks and genres from full metadata indexing, with M3U playlists, pins and listening history.",
+    body: "Artists, albums, tracks and genres from full metadata indexing, with playlists and folders, pins and listening history.",
+  },
+  {
+    title: "Streaming, side by side",
+    body: "Install a provider and its catalog and playlists join your local files in the same sidebar, played by the same engine.",
   },
   {
     title: "At home on macOS",
@@ -23,16 +28,17 @@ const DETAILS = [
 
 export function LibrarySection() {
   return (
-    <section id="library" className="relative overflow-hidden border-t border-line">
+    <section id="library" className="relative isolate overflow-hidden">
+      <AmbientLight primary="crimson" secondary="navy" className="top-[18%] bottom-[45%]" />
       <div className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
         <SectionHeading eyebrow="Library" title="A library that respects your files.">
           Point Puros at your music folders. It indexes full metadata, keeps your files where they are, and shows the real
-          format of every track.
+          format of every track, local or streamed.
         </SectionHeading>
 
         <ul className="reveal mt-10 flex flex-wrap gap-2" aria-label="Supported file formats">
           {FORMATS.map((format) => (
-            <li key={format} className="glass rounded-lg px-3 py-1.5 font-mono text-sm text-text">
+            <li key={format} className="glass rounded-full px-3.5 py-1.5 font-mono text-sm text-text">
               {format}
             </li>
           ))}
@@ -40,12 +46,12 @@ export function LibrarySection() {
 
         <Screenshot
           src={albums}
-          alt="Puros album grid with cover art, titles, artists and years"
+          alt="Puros album grid with cover art, titles, artists and years, under the floating glass player bar"
           sizes="(min-width: 1280px) 1216px, 100vw"
           className="reveal -mx-3 mt-16 sm:mx-0"
         />
 
-        <dl className="reveal mt-16 grid gap-10 sm:grid-cols-3">
+        <dl className="reveal mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {DETAILS.map((detail) => (
             <div key={detail.title}>
               <div className="hairline mb-6" />
@@ -62,13 +68,13 @@ export function LibrarySection() {
               Radio, without another app.
             </h3>
             <p className="mt-5 text-lg leading-relaxed text-muted">
-              Browse stations from Radio Browser by genre and country, or keep your own streams. They play through the
-              same engine, with the stream&rsquo;s real codec and bitrate on display.
+              Browse stations from Radio Browser by genre, country and language, or keep your own streams. They play
+              through the same engine, with the stream&rsquo;s real codec and bitrate on display.
             </p>
           </div>
           <Screenshot
-            src={liveRadio}
-            alt="Puros Live Radio view: Polish stations from Radio Browser, with codec and bitrate for each stream"
+            src={radio}
+            alt="Puros Live Radio: Radio Browser stations with codec and bitrate for each stream, and a detail pane for the selected station"
             sizes="(min-width: 1024px) 700px, 100vw"
             glow={false}
             className="reveal -mx-3 sm:mx-0"

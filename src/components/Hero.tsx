@@ -1,6 +1,7 @@
 import home from "@/assets/screenshots/home.png";
 import { LINKS, MINIMUM_MACOS } from "@/lib/links";
 import { RELEASES_URL, type Release } from "@/lib/release";
+import { AmbientLight } from "./AmbientLight";
 import { DownloadButton, SecondaryLink } from "./buttons";
 import { ArrowRightIcon, GitHubIcon } from "./icons";
 import { Screenshot } from "./Screenshot";
@@ -8,12 +9,9 @@ import { Screenshot } from "./Screenshot";
 export function Hero({ release }: { release: Release | null }) {
   const requirements = [release?.architecture ?? "Apple Silicon", MINIMUM_MACOS, "Signed and notarized"];
   return (
-    <section id="top" className="relative overflow-hidden">
-      {/* Restrained backlight in the navy of the app icon. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -top-40 h-[720px] bg-[radial-gradient(60%_60%_at_50%_0%,rgb(30_64_110/0.45),transparent_70%)]"
-      />
+    <section id="top" className="relative isolate">
+      {/* Navy backlight from the app icon, reaching up behind the floating header. */}
+      <AmbientLight primary="navy" secondary="violet" className="-top-28 bottom-[35%]" />
       <div className="relative mx-auto max-w-7xl px-5 pt-14 sm:px-8 sm:pt-20 lg:pt-24">
         <div className="rise mx-auto max-w-4xl text-center">
           <a
@@ -33,9 +31,9 @@ export function Hero({ release }: { release: Release | null }) {
             Every bit, accounted for.
           </h1>
           <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-pretty text-muted sm:text-xl">
-            Puros is a macOS music player with a serious audio engine. It takes exclusive control of your DAC,
-            follows every track&rsquo;s sample rate, and shows you the whole signal path from file to output. Free and
-            open source.
+            Puros is a macOS music player with a serious audio engine under a Liquid Glass interface. It takes exclusive
+            control of your DAC, follows every track&rsquo;s sample rate, and shows you the whole signal path from file to
+            output. Free and open source.
           </p>
 
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -50,7 +48,7 @@ export function Hero({ release }: { release: Release | null }) {
 
         <Screenshot
           src={home}
-          alt="Puros home screen: recently played playlists and a FLAC 24-bit / 48 kHz track in the player bar"
+          alt="Puros home screen: recently played playlists and songs, with the floating glass player bar and its waveform seek bar"
           sizes="(min-width: 1280px) 1216px, 100vw"
           preload
           className="rise-delayed -mx-3 mt-12 sm:mx-0 sm:mt-14"

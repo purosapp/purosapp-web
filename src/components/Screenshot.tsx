@@ -1,8 +1,10 @@
 import Image, { type StaticImageData } from "next/image";
 
 /**
- * A real Puros screenshot. The captures already include the macOS window
- * frame and shadow on pure black, so they sit directly on the page.
+ * A real Puros screenshot. The captures include the macOS window frame and
+ * its shadow on a transparent background, so they sit directly on the page
+ * and on the ambient light behind it. No blur placeholder: it would paint a
+ * dark rectangle where the transparent margin is.
  */
 export function Screenshot({
   src,
@@ -27,7 +29,7 @@ export function Screenshot({
           className="pointer-events-none absolute inset-x-[12%] top-[18%] bottom-[18%] -z-10 rounded-[40%] bg-[radial-gradient(closest-side,rgb(141_180_230/0.22),transparent)] blur-3xl"
         />
       ) : null}
-      <Image src={src} alt={alt} sizes={sizes} quality={90} preload={preload} placeholder="blur" className="h-auto w-full" />
+      <Image src={src} alt={alt} sizes={sizes} quality={90} preload={preload} className="h-auto w-full" />
     </div>
   );
 }

@@ -7,10 +7,10 @@ import { DiscordIcon, GitHubIcon } from "./icons";
 
 export function FinalCta({ release }: { release: Release | null }) {
   return (
-    <section className="relative overflow-hidden border-t border-line">
+    <section className="relative overflow-hidden">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[560px] bg-[radial-gradient(55%_60%_at_50%_100%,rgb(30_64_110/0.4),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[560px] bg-[radial-gradient(55%_60%_at_50%_100%,rgb(40_84_150/0.5),transparent_70%)]"
       />
       <div className="reveal relative mx-auto max-w-3xl px-5 py-32 text-center sm:px-8 sm:py-40">
         <Image src={icon} alt="Puros app icon" width={112} height={112} className="mx-auto size-24 drop-shadow-[0_20px_50px_rgb(30_64_110/0.6)] sm:size-28" />

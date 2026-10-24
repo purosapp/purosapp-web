@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 /*
- * Puros is dark by design: the page matches the app's near-black UI and the
- * pure-black backdrop of its screenshots.
+ * Puros is dark by design: the page matches the app's near-black UI. Colour
+ * comes from ambient light behind the glass, the way the app tints a page
+ * with the artwork that is playing.
  */
 @theme {
   --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
@@ -21,6 +22,12 @@
   --color-accent: #8db4e6;
   --color-accent-deep: #0b1b2c;
   --color-signal: #6ee7b7;
+
+  /* Signal Path quality marks, the same palette as the in-app format badges. */
+  --color-lossless: #4ade80;
+  --color-enhanced: #d8b4fe;
+  --color-high: #60a5fa;
+  --color-low: #facc15;
 }
 
 @layer base {
@@ -28,7 +35,7 @@
     background: var(--color-ink);
     color: var(--color-text);
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 6rem;
   }
 
   body {
@@ -49,12 +56,48 @@
 }
 
 @layer components {
-  /* Translucent macOS-style material. */
+  /*
+   * Liquid Glass: a blurred, saturated lens over whatever is behind it, a
+   * specular rim lit from the top left (the same rim the app draws on its
+   * glass), and a soft highlight along the top edge.
+   */
   .glass {
-    background: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02));
-    border: 1px solid var(--color-line);
-    backdrop-filter: blur(20px) saturate(140%);
-    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    position: relative;
+    isolation: isolate;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.075), rgb(255 255 255 / 0.025));
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.12),
+      inset 0 -1px 0 rgb(255 255 255 / 0.03),
+      0 12px 40px rgb(0 0 0 / 0.35);
+  }
+
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.32),
+      rgb(255 255 255 / 0.07) 30%,
+      rgb(255 255 255 / 0.03) 70%,
+      rgb(255 255 255 / 0.18)
+    );
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+    pointer-events: none;
+  }
+
+  /* Denser glass for the floating header and segmented controls, so text over busy content stays legible. */
+  .glass-thick {
+    background: linear-gradient(180deg, rgb(30 32 37 / 0.6), rgb(12 13 16 / 0.5));
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
   }
 
   .eyebrow {
@@ -119,31 +162,23 @@
   }
 }
 
-/* A sample travelling along the signal path. */
-@keyframes flow {
-  from {
-    transform: translateX(-100%);
+/* Ambient light drifts slowly behind the glass. Transform only, so it stays on the compositor. */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
   }
-  to {
-    transform: translateX(400%);
-  }
-}
-
-.flow {
-  animation: flow 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-}
-
-@keyframes flow-vertical {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(400%);
+  50% {
+    transform: translate3d(4%, -3%, 0) scale(1.08);
   }
 }
 
-.flow-vertical {
-  animation: flow-vertical 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+.drift {
+  animation: drift 22s ease-in-out infinite;
+}
+
+.drift-slow {
+  animation: drift 34s ease-in-out infinite reverse;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -154,8 +189,8 @@
   .rise,
   .rise-delayed,
   .reveal,
-  .flow,
-  .flow-vertical {
+  .drift,
+  .drift-slow {
     animation: none !important;
   }
 }

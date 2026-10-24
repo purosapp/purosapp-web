@@ -24,7 +24,7 @@ export function SecondaryLink({ href, children, className = "" }: { href: string
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${base} glass text-text hover:border-line-strong hover:bg-white/10 ${className}`}
+      className={`${base} glass text-text hover:bg-white/10 ${className}`}
     >
       {children}
     </a>

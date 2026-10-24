@@ -1,3 +1,4 @@
+import { DesignSection } from "@/components/DesignSection";
 import { DspSection } from "@/components/DspSection";
 import { ExtensibilitySection } from "@/components/ExtensibilitySection";
 import { FinalCta } from "@/components/FinalCta";
@@ -18,6 +19,7 @@ export default async function Home() {
       <SiteHeader release={release} />
       <main>
         <Hero release={release} />
+        <DesignSection />
         <PlaybackSection />
         <SignalPathSection />
         <DspSection />

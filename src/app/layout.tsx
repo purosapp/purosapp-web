@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 const description =
-  "A macOS music player with a serious audio engine: CoreAudio exclusive mode, automatic sample-rate switching, DSD over DoP and a signal path that shows every step from file to DAC. Free and open source.";
+  "A macOS music player with a serious audio engine under a Liquid Glass interface: CoreAudio exclusive mode, automatic sample-rate switching, DSD over DoP and a signal path that shows every step from source to DAC. Free and open source.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://getpuros.app"),
